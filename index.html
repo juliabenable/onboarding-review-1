@@ -1,0 +1,278 @@
+<title>Benable Onboarding Review</title>
+<style>
+  :root{ color-scheme:light }
+  body{
+    margin:0; background:#ffffff; color:#1f2328;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+    font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  .md{ max-width:800px; margin:0 auto; padding:48px 32px 80px }
+  @media (max-width:640px){ .md{ padding:28px 18px 56px; font-size:15px } }
+  .md h1{ font-size:2em; font-weight:600; line-height:1.25; margin:0 0 20px; letter-spacing:-.01em }
+  .md h2{ font-size:1.5em; font-weight:600; line-height:1.25; margin:40px 0 16px }
+  .md p{ margin:0 0 16px }
+  .md p.note{ color:#656d76; font-size:13px; margin-top:-6px }
+  .md hr{ border:0; border-top:1px solid #d8dee4; margin:32px 0 }
+  .md ol,.md ul{ margin:0 0 16px; padding-left:2em }
+  .md li{ margin:0 0 6px }
+  .md li > p{ margin:0 }
+  .md a{ color:#0969da; text-decoration:none }
+  .md a:hover,.md a:focus-visible{ text-decoration:underline }
+  .md a:focus-visible{ outline:2px solid #0969da; outline-offset:2px }
+  .md strong{ font-weight:600 }
+  .md code{
+    font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+    font-size:85%; background:rgba(175,184,193,.2); padding:.2em .4em; border-radius:6px; white-space:break-spaces;
+  }
+  .tablewrap{ overflow-x:auto; margin:0 0 20px }
+  .md table{ border-collapse:collapse; width:100%; min-width:640px; font-size:14px; line-height:1.5 }
+  .md th{ text-align:left; font-weight:600; padding:8px 12px; border-bottom:1px solid #d0d7de; vertical-align:bottom }
+  .md td{ padding:8px 12px; border-bottom:1px solid #e6eaef; vertical-align:top }
+  .md th:first-child,.md td:first-child{ padding-left:0 }
+  .md th:last-child,.md td:last-child{ padding-right:0 }
+  .md table code{ font-size:85% }
+  @media print{ .tablewrap{ overflow:visible } .md table{ min-width:0 } }
+</style>
+<div class="md">
+<h1 id="benable-onboarding-review--final-report">Benable Onboarding Review — Final Report</h1>
+<p><strong>Prepared for:</strong> Julia Guillemot · <strong>By:</strong> Willa · <strong>Date:</strong> 2026-09-03<br />
+<strong>Method:</strong> Secret-shopper audit. Fresh account <strong>Willa Skydive</strong> (<a href="mailto:willa@skydivemail.ai">willa@skydivemail.ai</a>, @willaskydive) created 2026-08-28 14:41 UTC via the web email-signup path (Paris IP). Inbox was empty at baseline, so every email below is attributable to Benable. Inbox swept 3×/day through 2026-09-03 07:00 UTC (~5d16h window). All emails opened, all CTAs and flows exercised (survey completed, dashboards verified via magic links, Wrapped viewed).<br />
+<strong>Supporting files (same folder):</strong> <code>email-log.md</code> (full raw log), <code>screenshots/</code> (signup flow b1–b21, survey1–6, email dashboards, Wrapped slides), <code>competitor-onboarding-research.md</code> (sourced comparison research).</p>
+<p class="note">The supporting files are not included in this hosted copy of the report.</p>
+<hr />
+<h2 id="1-executive-summary">1. Executive summary</h2>
+<p>Benable's week-one onboarding is <strong>behaviorally sophisticated but executionally sloppy</strong>. The architecture is genuinely strong — nearly every email is trigger-based rather than calendar-based, the $5 survey and tune-up dashboard are best-in-class activation mechanics, and the monthly Wrapped is a retention/viral idea most competitors don't have. But the sequence is undermined by a dense layer of template bugs (a raw <code>{user.contact_name_or_name}</code> variable in a day-1 email, full-name greetings on every automated email, "© 2025" footers, four separate copy typos), two structural gaps vs. every comparable platform (<strong>no email verification</strong> and <strong>no day-2/3 re-engagement email for users who don't act</strong>), and a premature referral ask in the first minute of the relationship.</p>
+<p><strong>Top 5 fixes by impact-to-effort:</strong></p>
+<ol type="1">
+<li>Fix the raw template variable in the referral email (day-1, every new user sees it).</li>
+<li>Switch all support@ templates from full name to first name (one merge-field change; the human-sender template already does it right).</li>
+<li>Update "© 2025" → dynamic year across the template family.</li>
+<li>Add email verification — ideally Linktree-style "verify to activate," or lean into the existing magic-link infrastructure and go passwordless.</li>
+<li>Move the referral email from minute-2 to post-first-value (e.g. after first rec or first cashback), matching what every comparable platform does.</li>
+</ol>
+<hr />
+<h2 id="2-complete-email-inventory-10-emails-6-days">2. Complete email inventory (10 emails, 6 days)</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Timing (from signup)</th>
+<th>Received (UTC)</th>
+<th>Sender</th>
+<th>Subject</th>
+<th>Type / trigger</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>T+2 min</td>
+<td>08-28 14:43</td>
+<td>support@ (Benable Team)</td>
+<td>"Hey!"</td>
+<td>Welcome (signed Maria, Community lead); 90-sec video, magic-link login, FAQ/tutorials</td>
+</tr>
+<tr>
+<td>2</td>
+<td>T+2 min</td>
+<td>08-28 14:43</td>
+<td>support@</td>
+<td>"🙌 Refer a friend, you'll both earn higher commissions!"</td>
+<td>Referral push (same minute as #1)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>T+15 min</td>
+<td>08-28 14:56</td>
+<td>support@</td>
+<td>"Get your Benable lists discovered!"</td>
+<td>Behavioral: first rec added → Optimized-badge education</td>
+</tr>
+<tr>
+<td>4</td>
+<td>T+25h</td>
+<td>08-29 16:02</td>
+<td>support@</td>
+<td>"Quick question = $5 for you!"</td>
+<td>Incentivized signup-source survey (3 Qs, &lt;1 min)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>T+25h24m</td>
+<td>08-29 16:05</td>
+<td>support@</td>
+<td>"Bonus received!"</td>
+<td>Transactional: $5 survey bonus credited (~1h after survey completion)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>T+58h</td>
+<td>08-31 00:17</td>
+<td>support@</td>
+<td>"Your My favorite beauty recs list has been viewed!"</td>
+<td>Behavioral: real-time list-view notification</td>
+</tr>
+<tr>
+<td>7</td>
+<td>T+62h</td>
+<td>08-31 04:53</td>
+<td>support@</td>
+<td>"People liked your Benable recommendations this week!"</td>
+<td>Weekly like digest (n=1)</td>
+</tr>
+<tr>
+<td>8</td>
+<td>T+74h</td>
+<td>08-31 16:42</td>
+<td><strong>hannah.stevens@</strong> (human)</td>
+<td>"Get featured?"</td>
+<td>Lifecycle: featured-list invitation, plain-text 1:1 style</td>
+</tr>
+<tr>
+<td>9</td>
+<td>T+76h</td>
+<td>08-31 18:27</td>
+<td>support@</td>
+<td>"Action-needed: suggestions to improve your list and profile quality!"</td>
+<td>Lifecycle: Tune-up dashboard nudge (6 improvement items)</td>
+</tr>
+<tr>
+<td>10</td>
+<td>T+4d18h</td>
+<td>09-02 08:23</td>
+<td>support@</td>
+<td>"Your Aug '26 Benable Wrapped is ready!"</td>
+<td>Monthly recap: 6-slide shareable Wrapped story</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Cadence shape:</strong> day-1 burst (3) → day-2 survey + bonus (2) → day-3 engagement notifications (2) → day-4 human outreach + tune-up (2) → day-5 Wrapped (1) → days 6+ silent. Total 10 emails in 5 days — heavier than Notion's documented 7-in-8-days and roughly Pinterest-tier, but note that ~half were triggered by <em>my</em> activity (recs added, survey done, list viewed/liked). A passive signup would have received meaningfully fewer — which is exactly the segment with no re-engagement coverage (see §5).</p>
+<hr />
+<h2 id="3-in-product-flow-observations-signup-2026-08-28">3. In-product flow observations (signup, 2026-08-28)</h2>
+<ul>
+<li>Email signup: Full Name / Email / Password — <strong>no email verification step anywhere</strong>; the account is live immediately and no confirm-your-email is ever sent.</li>
+<li><strong>Invite-code step:</strong> skippable — but skipping still produced "<strong>Benable</strong> invited you to join Benable!" and granted the 10% commission bonus for 30 days (house-account fallback). The exclusivity framing ("were you referred?") is undermined if everyone gets the bonus anyway.</li>
+<li>Phone-number step (skippable), username reservation, then a well-designed first-rec composer: geo-aware placeholder suggestions (Paris IP → "Crêpes Parisiennes"), auto-built product card, add-note step, confetti celebration.</li>
+<li>"Not just for products" step pushes a local/restaurant rec — good category education.</li>
+<li>Strong overall: the flow gets a user to 2 recs and a list before they ever reach the feed. This is a genuinely good activation funnel; the issues are polish, not architecture.</li>
+</ul>
+<h2 id="4-bugs-and-defects-found-by-severity">4. Bugs and defects found (by severity)</h2>
+<p><strong>High visibility / embarrassing:</strong></p>
+<ol type="1">
+<li>🐛 <strong>Raw template variable in Email 2:</strong> greeting renders as "Hi, <code>{user.contact_name_or_name}</code>!" — a day-1 email every new user receives. Highest-priority fix in this report.</li>
+<li>🐛 <strong>"FIRST REC" celebration repeats:</strong> adding a <em>second</em> rec re-triggers "WOOHOO! YOU ADDED YOUR FIRST REC!".</li>
+<li>🐛 <strong>Full-name greeting on every support@ email:</strong> "Hi Willa Skydive" on emails 1, 3, 4, 5, 6, 7, 9, 10. Email 8 (human sender template) correctly says "Hi Willa," — proving the data is fine and the bug is in the support@ template family's merge field.</li>
+<li>🐛 <strong>Stale "© 2025" footer</strong> on every support@ email, now well into 2026.</li>
+</ol>
+<p><strong>Copy/template defects:</strong></p>
+<ol start="5" type="1">
+<li>"your your list(s)" doubled word (Email 6); also non-pluralization-aware "list(s)".</li>
+<li>"to take easily take action" garbled phrase (Email 9).</li>
+<li>bit.ly slug typo <code>benable-optimsed-list-guidelines</code> ("optimsed"), used in Emails 3 and 8.</li>
+<li>Stray orphan word "list" above the footer in Email 3 (broken template fragment).</li>
+<li>Missing comma after greeting in several support@ emails.</li>
+</ol>
+<p><strong>Product/UX issues surfaced by the audit:</strong></p>
+<ol start="10" type="1">
+<li><strong>"Top 80% most active users"</strong> in Wrapped is statistically hollow (excludes only the bottom 20% — nearly everyone "achieves" it). Shareable by design, so it invites public ridicule à la the "top 91% of listeners" memes. Use a real percentile or suppress for low-activity accounts.</li>
+<li><strong>"4.4 engagement score"</strong> (Wrapped) has no scale, no explanation, and exists nowhere else in the product. Same problem as Email 9's "profile score" vs. the dashboard's "profile quality" — internal metrics leaking to users with inconsistent vocabulary.</li>
+<li><strong>Email 5 never states the bonus amount or reason</strong> ("you just received a cash bonus") — user must click through to learn it's $5 for the survey. Stating it would boost clarity and delight.</li>
+<li><strong>Emails 6+7 double-notify one event:</strong> a single visitor's single session (Marissa Everett viewing + liking one list) generated both a real-time view notification and a weekly "people liked" digest ~4.5h apart. Digest with n=1 feels thin; overlap will feel spammy at scale.</li>
+<li><strong>Email anonymizes the viewer ("Someone in Peoria, IL") but the dashboard fully identifies her</strong> (name, photo, timestamp). Privacy question: are viewers told their browsing is visible by name to list owners?</li>
+<li>Email 9's tune-up count pads "install the mobile app" as one of "6 opportunities to improve your lists and profile quality" — it isn't one.</li>
+<li>Email 8's "get featured" flattery is followed 1h45m later by Email 9's "your profile has 6 problems" — sequencing collision.</li>
+<li>Email 4 subject says "Quick question" (singular) vs. body "3 quick questions" — minor.</li>
+<li>Weekly digest sent 04:53 UTC Sunday (~midnight US Eastern) — batch job, not send-time-optimized.</li>
+</ol>
+<p><strong>Security/compliance notes:</strong></p>
+<ol start="19" type="1">
+<li><strong>Magic-link tokens granting full login sessions sit in plaintext in every email.</strong> Standard for the pattern, but each email is effectively a session credential — forwarding one forwards account access. Worth a deliberate policy review (expiry, single-use).</li>
+<li><strong>No unsubscribe link in the plain-text part</strong> of the Wrapped email (verified against the stored message: footer has only copyright + postal address). If the HTML part also lacks it, that's a CAN-SPAM/GDPR problem for a marketing email; even if HTML has it, plain-text readers get none.</li>
+<li>Wrapped pages are public by URL token — intentionally shareable, but the URL exposes name + activity to anyone holding the link.</li>
+<li><strong>No email verification at signup</strong> (see gaps below) — accounts can be created with any address, which also means all these magic-link session emails could be delivered to an address the signer-up doesn't control.</li>
+</ol>
+<h2 id="5-gaps-vs-comparable-platforms">5. Gaps vs. comparable platforms</h2>
+<p>Full research (sourced) in <code>competitor-onboarding-research.md</code>; benchmarks: LTK, ShopMy, Linktree, Pinterest, Substack, Notion, Duolingo.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Benable today</th>
+<th>Comparable platforms</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Email verification</strong></td>
+<td>None, at any point</td>
+<td>Pinterest &amp; Linktree: dedicated day-1 verify email (Linktree frames it as "activate your Linktree"); Substack &amp; Notion: passwordless by design; ShopMy/LTK: gated by emailed approval/code. Only Duolingo skips it.</td>
+</tr>
+<tr>
+<td><strong>Day-2/3 nudge for inactive users</strong></td>
+<td>None observed — everything after day 1 was triggered by <em>my</em> activity. A passive signup gets the day-2 survey and then likely silence.</td>
+<td>Duolingo's day-3 streak-freeze "recovery" email targets day-2 no-shows; Notion pulses 2/1/1/0/0/1/0/1 with feature-adoption emails regardless of activity; Pinterest sends interest-based content days 1–2 before the user does anything.</td>
+</tr>
+<tr>
+<td><strong>Referral timing</strong></td>
+<td>Minute 2 of the relationship (Email 2), before any value moment</td>
+<td><strong>None of the six platforms asks for referrals in week one.</strong> Referral literature is unanimous: fire after the first value moment.</td>
+</tr>
+<tr>
+<td><strong>Sequence transparency / sender consistency</strong></td>
+<td>Mixed senders (support@ "Benable Team", "Maria" signature, then hannah.stevens@); no series framing</td>
+<td>Notion: numbered "(X/7)" series from one consistent human sender ("Zoe at Notion")</td>
+</tr>
+<tr>
+<td><strong>Content-as-onboarding</strong></td>
+<td>Emails are about features/mechanics; none show actual recommendations from the platform</td>
+<td>Pinterest's activation emails <em>are</em> the product — curated Pins matched to signup interests, then your-own-board-based digests</td>
+</tr>
+<tr>
+<td><strong>Single activation metric</strong></td>
+<td>Diffuse: recs, badge, referral, survey, tune-up, app install all compete</td>
+<td>LTK: Shop live; Linktree: page shared; Pinterest: first board; Notion: first doc — every email serves one goal</td>
+</tr>
+<tr>
+<td><strong>Volume</strong></td>
+<td>10 in 5 days for an active user (day-1 burst of 3, incl. 2 in the same minute)</td>
+<td>Notion 7-in-8; industry default 4–6 in week one, front-loaded then deliberately quiet mid-week</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>What Benable does that competitors don't (worth keeping and building on):</strong></p>
+<ul>
+<li><strong>$5 incentivized signup-source survey</strong> with instant credited reward — flawless end-to-end, low friction, feeds segmentation. None of the compared platforms does this.</li>
+<li><strong>Tune-up dashboard</strong> with per-item fixes and a progress ring — a genuinely good gamified quality loop (fix the email copy driving to it).</li>
+<li><strong>Monthly Wrapped</strong> — on-trend, uses real user data, built-in share loop. Fix the hollow stats and it's a standout.</li>
+<li><strong>Human "get featured" outreach on day 4</strong> — named sender, first-name greeting, reply invitation; boosts reply rates and feels concierge (ShopMy-like touch).</li>
+<li>Magic-link CTAs everywhere = zero-friction re-entry (just needs the security policy review above).</li>
+</ul>
+<h2 id="6-recommendations">6. Recommendations</h2>
+<p><strong>Fix now (template-level, low effort):</strong></p>
+<ol type="1">
+<li>Repair <code>{user.contact_name_or_name}</code> in the referral email.</li>
+<li>First-name merge field across the support@ template family (copy the human-template's behavior).</li>
+<li>Dynamic copyright year.</li>
+<li>Fix the four copy typos (§4 items 5–8) and the "FIRST REC" repeat celebration.</li>
+<li>State "$5 for completing your survey" in the bonus email.</li>
+</ol>
+<p><strong>Structural (this quarter):</strong></p>
+<ol start="6" type="1">
+<li><strong>Add email verification</strong> — best: merge it with activation ("Verify to activate your Benable") or go fully passwordless via the magic-link infra you already have.</li>
+<li><strong>Move the referral email</strong> to fire on a value trigger (first cashback, first list view, or Optimized badge) instead of minute 2. The day-1 slot it frees can carry the Optimized-badge education.</li>
+<li><strong>Add a day-2/3 recovery email for users with zero recs</strong> — Benable's current sequence only talks to users who are already active; the churn-risk segment hears nothing after day 1. A "here are 5 lists we think you'll love" (Pinterest-style, interest-matched from the survey answers) does re-engagement and content-as-onboarding in one email.</li>
+<li><strong>Deduplicate engagement notifications:</strong> suppress the weekly digest when its only content was already sent as a real-time notification; set a minimum n for digests.</li>
+<li><strong>Pick one activation metric</strong> (suggest: <em>first list reaches Optimized badge</em> — it already has education, a dashboard, and the featured-list reward attached) and audit every week-one email against it.</li>
+</ol>
+<p><strong>Polish:</strong></p>
+<ol start="11" type="1">
+<li>Fix or suppress the Wrapped "top 80%" stat; define the engagement score or cut it; unify "profile score"/"profile quality" vocabulary.</li>
+<li>Sequence guard so the human "get featured" email and the "6 problems" tune-up email can't land within a few hours of each other.</li>
+<li>Add plain-text unsubscribe to marketing templates; review magic-link expiry/single-use policy; decide the viewer-identity privacy stance (email vs. dashboard inconsistency).</li>
+<li>Send-time-optimize the weekly digest (currently ~midnight US Eastern on Saturday).</li>
+<li>Reconsider the house-account fallback that grants the 10% referral bonus to users who skip the invite step — either make the bonus universal and drop the invite-code framing, or make it genuinely referral-only.</li>
+</ol>
+<p><strong>Optional follow-up tests I can run on request:</strong> reply to Hannah's "get featured" email and audit the human-response loop; verify HTML-part unsubscribe presence across all templates; run a second passive account (zero activity) to map exactly what an inactive user receives; test the mobile-app onboarding path.</p>
+<hr />
+<p><em>Every claim above is backed by the raw log (<code>email-log.md</code>), screenshots (<code>screenshots/</code>), and sourced competitor research (<code>competitor-onboarding-research.md</code>) in this folder.</em></p>
+</div>
